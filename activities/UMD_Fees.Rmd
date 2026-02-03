@@ -27,13 +27,29 @@ umd_fees <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/hea
 umd_fees_pct <- umd_fees |> mutate(pct_change = (`Fall 2024`- `Fall 2021`)/`Fall 2021` * 100)
 ```
 
+```{r}
+umd_fees_pct_2524<- umd_fees |> mutate(pct_change = (`Fall 2025`- `Fall 2024`)/`Fall 2024` * 100)
+```
+
+```{r}
+comp <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/class_composition.csv")
+
+comp |>
+  summarize(
+    mean_first = mean(first_year),
+    mean_soph = mean(sophomore),
+    mean_junior = mean(junior),
+    mean_senior = mean(senior),
+    mean_grad = mean(grad)
+  )
+```
 
 
 ### Task 4: Describe our results
 
 Write a few sentences about what you found in the data. What's the story here?
 
-
+Based on the positive percent changes, UMD student fees have gone up in nearly every category, except athletics. This can be a story about increased student fees and what these costs are being used for. This can also be a bigger story about the increasing costs of higher education and, with more data, how the economy affects these prices. 
 
 
 
