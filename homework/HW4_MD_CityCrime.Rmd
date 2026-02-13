@@ -62,7 +62,7 @@ ANSWER HERE: One interesting thing I notice is that multiple cities in Prince Ge
 
 ### Task 8: Tell the Best Story
 
-Write up a lede and nutgraf of a story with the _best_ story idea you've found in this assignment. The lede should be a single sentence that summarizes the most important information in the data. The nutgraf should be a paragraph that provides more context and explains why the data is important.
+Write up a lede and nutgraf of a story with the best story idea you've found in this assignment. The lede should be a single sentence that summarizes the most important information in the data. The nutgraf should be a paragraph that provides more context and explains why the data is important.
 
 ANSWER HERE: Violent crime rose across Prince George’s County from 2019 to 2020, even as much of daily life shut down during the first year of the COVID-19 pandemic.
 
@@ -71,3 +71,21 @@ Cities like Edmonston, Cottage City, Glenarden and Mount Rainier saw violent cri
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+Task 10: Violent Crime Rates
+
+Using the 2020 violent crime rate, calculate the percentiles using `ntile()`. Save the results to a new dataframe called `md_cities_percentiles`. How many cities are above the 90th percentile?
+10 cities are above the 90th percentile.
+
+```{r}
+md_cities_percentiles <- md_cities_rates|> 
+  mutate(percentile = ntile(violent_rate_2020, 100))
+```
+
+Calculate the Interquartile Range of the 2020 violent crime rate using `summarize()` and R's `IQR()` function. The syntax is similar to how `mean()` works.
+```{r}
+md_cities_rates |>
+  summarize(IQR_violent_rate_2020 = IQR(violent_rate_2020))
+```
+
+Do the results change your best story idea from the previous assignment? Why or why not?: I don't think this changes my answer. Though the middle range of data sees high violent crime rates in 2020, PG County still saw a rate higher than 42 in over 10 cities. This is a high portion of PG County cities with higher-than-average violent rates.
