@@ -74,7 +74,7 @@ summary(daily_calls$call_count)
 
 Let's visualize the time series of daily calls. What patterns do you see? If you had to draw horizontal lines that would highlight unusual days, where would those lines be?
 
-ANSWER HERE
+ANSWER HERE: I predict that at the beginning of the month, especially around holidays (Halloween, NYE) there are more overdoses. A line highlighting unusual days would show the random high spikes throughout the year, as well as unusual low days.
 
 ```{r daily-calls-plot}
 # Plot daily call volume
@@ -137,7 +137,7 @@ unusual_days |>
 
 Let's visualize these unusual days in the context of the full dataset. How do they differ from your answer on Task 3?
 
-ANSWER HERE
+ANSWER HERE: These answers are primarily the same. The red dot does indicate that overdoses don't increase on Halloween, which I misread. It also demonstrates higher unusual scores in the early spring, and lower in the fall/winter; I would not have expected this.
 
 ```{r plot-unusual-days}
 # Create a clean factor for the plot legend
@@ -207,7 +207,7 @@ ggplot(dow_summary, aes(x = day_of_week, y = avg_calls)) +
 
 We can also calculate z-scores that account for the day of the week pattern. How would you describe the day with the highest z-score without using the term "z-score"?
 
-ANSWER HERE
+ANSWER HERE: Saturday's had the highest average amount of overdose calls to 911 in Baltimore in 2022.
 
 ```{r day-of-week-z-scores}
 # Calculate day-of-week adjusted z-scores
@@ -298,5 +298,5 @@ top_outliers |> kable(digits = 2)
 
 Based on our z-score analysis, what are some potential angles for reporting? What would your next steps be and what would you tell an editor about your findings?
 
-ANSWER HERE
+ANSWER HERE: I would definitely do more investigation on what caused spikes in overdoses. These are likely due to bad batches of fentanyl, so I would do my best to find eye-witness reports from drug-users about what caused these overdoses. I would tell an editor that these are overdoses are seemingly random, but probably are due to the fentanyl being distributed.
 
