@@ -79,7 +79,7 @@ sleep_stats |>
 
 **Answer this question:** Write one sentence explaining what this confidence interval means in plain English that a reader would understand.
 
-ANSWER HERE: The confidence interval means that the true answer falls within the lower bound to upper bound, indicating that the mean is accurate.
+ANSWER HERE: I am 95% confident that the true population average falls between 7.5 and 7.95, but could be inaccurate by a margin of error of 0.45
 
 ### Task 5: Visualize the distribution with the confidence interval
 
