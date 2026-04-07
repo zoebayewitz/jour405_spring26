@@ -92,11 +92,11 @@ ggplot(nonvoters_data, aes(x = weight)) +
 
 **Questions:**
 
-1. What is the range of weights in this dataset?
+1. What is the range of weights in this dataset? 0.3-2.6
 
-2. What does it mean when a respondent has a weight of 0.23? What about 3.04?
+2. What does it mean when a respondent has a weight of 0.23? What about 3.04? 0.23 means that the respondent is counted as less than 1/4 of a person in the analysis because they're overrepresented compared to the general population. A 3.04 weight means that one person's response is counted as about 3 people because they were underrepresented in the sample. 
 
-3. Why might some respondents be weighted more heavily than others?
+3. Why might some respondents be weighted more heavily than others? Weight corrects the response rate of different groups. Let's say very few Black voters responded to this survey at all; their answers would be weighed more heavily because their answers represent more of the population than in the sample.
 
 # Exercise 1: Voter Categories and Weighting
 
@@ -231,8 +231,8 @@ kable(comparison, digits = 1, caption = "Difference Between Weighted and Unweigh
 
 **Answer These Questions:**
 
-1. Which voter category shows the biggest difference between weighted and unweighted results?
+1. Which voter category shows the biggest difference between weighted and unweighted results?: The rarely/never category has the biggest difference between weighted and unweighted.
 
-2. How might these differences affect reporting on likely voter turnout?
+2. How might these differences affect reporting on likely voter turnout?: The rarely/never category shows that this category is underrepresented in the poll. Weighting changes the responses drastically. If a poll ignores, underweighs or overweighs, then it makes the group look more or less engaged than it actually is, and the reporting might over or understate turnout.
 
-3. Why do you think these differences exist? What does this tell us about who might be over or under-represented in the sample?
+3. Why do you think these differences exist? What does this tell us about who might be over or under-represented in the sample?: Rarely/never voters tend to have lower income and education levels. These groups are historically harder to reach, both in polling and voting. The unweighted sample shows that habitual voters are older, more educated and higher-income; the weight corrects this by amplifying the answers of underrepresented groups, showing a more accurate sample of public opinion.
