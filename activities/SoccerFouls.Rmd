@@ -51,4 +51,17 @@ matches |>
 
 The correlation calculation line is nearly flat, showing us a weak and slightly positive relationship between goal differentials and fouls. The data points are widely scattered, and there is no clustering around the trend line. Teams with both positive and negative differentials seem to have similar amounts of fouls. Overall, teams that win by more goals do not statistically meaningfully commit more or few fouls.
 
+### Task 7: Choose another variable and repeat steps from Tasks 4 and 5. Then describe the result. Variable: points
+
+```{r}
+matches |> summarize(correlation = cor(points, goal_diff, method="pearson"))
+```
+```{r}
+matches |> 
+  ggplot() +
+  geom_point(aes(x=goal_diff, y=points)) +
+  geom_smooth(aes(x=goal_diff, y=points), method="lm")
+```
+Points have a much stronger positive correlation with goal differentials than fouls did. With a 0.7 correlation coefficient, there is a strong correlation between the points and goal differentials that teams make.
+
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
