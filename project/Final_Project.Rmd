@@ -1,0 +1,18 @@
+---
+title: "Final Project"
+output: html_notebook
+---
+
+Try to have your data identified and loaded (if not, make substantial progress on doing that) this week. You should create a notebook called final_project.Rmd in the project folder of your class repository. Put all notes and code in that document, and do not spare the details. If you have the data, describe the source, providing links to it and any documentation you can find. If you can load it from the Web, do that. If not, save a copy of the data in your project folder. IMPORTANT NOTE: do not save a copy if it is more than 100MB in size. Instead, contact me first for assistance.
+
+Otherwise, load the data and examine it using the tidyverse and read_csv, describing it in your project notebook. What does it contain and what time period does it cover? Which columns will be most important for your analysis? What's missing that you might need or want? What questions do you have about it or need help answering? Again, the more detail, the higher your grade.
+
+```{r}
+music_revenue <- read_csv("/Users/zoebayewitz/Documents/GitHub/jour405_spring26/project/Recorded_Music_Revenue.csv")
+```
+Historical data of yearly revenue recorded by RIAA of music sales from 1973-2021. Filtered by four formats:  Physical, Digital Downloads, Streaming, and Synchronization. Physical versus streaming will be my focus. I need more information on what is included in every format and how comprehensive they are. This will be helpful in tracking the progression of digital streaming and how/when it impacted physical music sales.
+
+```{r}
+inflation <- read_csv("/Users/zoebayewitz/Documents/GitHub/jour405_spring26/project/cpi_inflation.csv")
+```
+Tracks monthly inflation rates from 2015-2022. Used in conjunction with the revenue sales to weigh customer spending habits accordingly.
