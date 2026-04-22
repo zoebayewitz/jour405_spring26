@@ -1752,21 +1752,28 @@ display: none;
 
 
 <!-- rnb-text-begin -->
-<p>Try to have your data identified and loaded (if not, make substantial
-progress on doing that) this week. You should create a notebook called
-final_project.Rmd in the project folder of your class repository. Put
-all notes and code in that document, and do not spare the details. If
-you have the data, describe the source, providing links to it and any
-documentation you can find. If you can load it from the Web, do that. If
-not, save a copy of the data in your project folder. IMPORTANT NOTE: do
-not save a copy if it is more than 100MB in size. Instead, contact me
-first for assistance.</p>
-<p>Otherwise, load the data and examine it using the tidyverse and
-read_csv, describing it in your project notebook. What does it contain
-and what time period does it cover? Which columns will be most important
-for your analysis? What’s missing that you might need or want? What
-questions do you have about it or need help answering? Again, the more
-detail, the higher your grade.</p>
+<p>HYPOTHESIS: Revenue earned from streaming services has not fully
+compensated for the music industry’s decline in physical music sales,
+when adjusted for inflation.</p>
+<p>Code I could run: - adjusting inflation from monthly to yearly
+(partially done– just need to calculate averages) - compare this data to
+physical and streaming sales - linear regression chart: find the lines
+of streaming and physical revenue over time and graph them using a
+ggplot - (more math) calculate yearly percent changes of physical and
+streaming sales (gives us more specific indicators of when streaming
+didn’t compensate for physical) - measure correlation coefficient of
+physical’s decline and streaming’s rise - calculate the dollar amount
+between what physical earned before and what streaming earns now,
+including inflation</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViR2xpY21GeWVTaDBhV1I1ZG1WeWMyVXBYRzVnWUdBaWZRPT0gLS0+XG5cbmBgYHJcbmxpYnJhcnkodGlkeXZlcnNlKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyverse)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViWFZ6YVdOZmNtVjJaVzUxWlNBOExTQnlaV0ZrWDJOemRpaGNJaTlWYzJWeWN5OTZiMlZpWVhsbGQybDBlaTlFYjJOMWJXVnVkSE12UjJsMFNIVmlMMnB2ZFhJME1EVmZjM0J5YVc1bk1qWXZjSEp2YW1WamRDOVNaV052Y21SbFpGOU5kWE5wWTE5U1pYWmxiblZsTG1OemRsd2lLVnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbm11c2ljX3JldmVudWUgPC0gcmVhZF9jc3YoXCIvVXNlcnMvem9lYmF5ZXdpdHovRG9jdW1lbnRzL0dpdEh1Yi9qb3VyNDA1X3NwcmluZzI2L3Byb2plY3QvUmVjb3JkZWRfTXVzaWNfUmV2ZW51ZS5jc3ZcIilcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
@@ -1774,22 +1781,41 @@ detail, the higher your grade.</p>
 <pre class="r"><code>music_revenue &lt;- read_csv(&quot;/Users/zoebayewitz/Documents/GitHub/jour405_spring26/project/Recorded_Music_Revenue.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNCBDb2x1bW5zOiA1NOKUgOKUgCBDb2x1bW4gc3BlY2lmaWNhdGlvbiDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcbkRlbGltaXRlcjogXCIsXCJcbmNociAoNTQpOiBGb3JtYXQyLCAxOTczLCAxOTc0LCAxOTc1LCAxOTc2LCAxOTc3LCAxOTc4LCAxOTc5LCAxOTgwLCAxOTgxLCAxOTgyLCAxOTguLi5cbuKEuSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbuKEuSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
-<pre><code>Rows: 4 Columns: 54── Column specification ──────────────────────────────────────────────────────────────
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNCBDb2x1bW5zOiA1NOKUgOKUgCBDb2x1bW4gc3BlY2lmaWNhdGlvbiDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIBcbkRlbGltaXRlcjogXCIsXCJcbmNociAoNTQpOiBGb3JtYXQyLCAxOTczLCAxOTc0LCAxOTc1LCAxOTc2LCAxOTc3LCAxOTc4LCAxOTc5LCAxOTgwLCAxOTgxLCAuLi5cbuKEuSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbuKEuSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
+<pre><code>Rows: 4 Columns: 54── Column specification ─────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
-chr (54): Format2, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 198...
+chr (54): Format2, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, ...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Historical data of yearly revenue recorded by RIAA of music sales
-from 1973-2021. Filtered by four formats: Physical, Digital Downloads,
-Streaming, and Synchronization. Physical versus streaming will be my
-focus. I need more information on what is included in every format and
-how comprehensive they are. This will be helpful in tracking the
-progression of digital streaming and how/when it impacted physical music
-sales.</p>
+from 1973-2025. Filtered by four formats: Physical, Digital Downloads,
+Streaming, and Synchronization. Physical versus Streaming will be my
+focus. The data is originally in wide format, so it needs to be switched
+into long format. I’ll focus on the physical and streaming rows (use
+Derek code). I’ll also need to clean the data because numbers are in
+revenue format, and the column names aren’t cleaned.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHViWFZ6YVdOZmNtVjJaVzUxWlY5c2IyNW5JRHd0SUcxMWMybGpYM0psZG1WdWRXVWdmRDVjYmlBZ2NHbDJiM1JmYkc5dVoyVnlLRnh1SUNBZ0lHTnZiSE1nUFNBdFJtOXliV0YwTWl4Y2JpQWdJQ0J1WVcxbGMxOTBieUE5SUZ3aWVXVmhjbHdpTEZ4dUlDQWdJSFpoYkhWbGMxOTBieUE5SUZ3aWNtVjJaVzUxWlZ3aVhHNGdJQ2tnZkQ1Y2JpQWdiWFYwWVhSbEtGeHVJQ0FnSUhsbFlYSWdQU0JoY3k1cGJuUmxaMlZ5S0hsbFlYSXBMRnh1SUNBZ0lISmxkbVZ1ZFdVZ1BTQndZWEp6WlY5dWRXMWlaWElvY21WMlpXNTFaU2xjYmlBZ0tTQjhQbHh1SUNCeVpXNWhiV1VvWm05eWJXRjBJRDBnUm05eWJXRjBNaWxjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbm11c2ljX3JldmVudWVfbG9uZyA8LSBtdXNpY19yZXZlbnVlIHw+XG4gIHBpdm90X2xvbmdlcihcbiAgICBjb2xzID0gLUZvcm1hdDIsXG4gICAgbmFtZXNfdG8gPSBcInllYXJcIixcbiAgICB2YWx1ZXNfdG8gPSBcInJldmVudWVcIlxuICApIHw+XG4gIG11dGF0ZShcbiAgICB5ZWFyID0gYXMuaW50ZWdlcih5ZWFyKSxcbiAgICByZXZlbnVlID0gcGFyc2VfbnVtYmVyKHJldmVudWUpXG4gICkgfD5cbiAgcmVuYW1lKGZvcm1hdCA9IEZvcm1hdDIpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXVzaWNfcmV2ZW51ZV9sb25nIDwtIG11c2ljX3JldmVudWUgfD5cbiAgcGl2b3RfbG9uZ2VyKFxuICAgIGNvbHMgPSAtRm9ybWF0MixcbiAgICBuYW1lc190byA9IFwieWVhclwiLFxuICAgIHZhbHVlc190byA9IFwicmV2ZW51ZVwiXG4gICkgfD5cbiAgbXV0YXRlKFxuICAgIHllYXIgPSBhcy5pbnRlZ2VyKHllYXIpLFxuICAgIHJldmVudWUgPSBwYXJzZV9udW1iZXIocmV2ZW51ZSlcbiAgKSB8PlxuICByZW5hbWUoZm9ybWF0ID0gRm9ybWF0MilcbmBgYCJ9 -->
+<pre class="r"><code>music_revenue_long &lt;- music_revenue |&gt;
+  pivot_longer(
+    cols = -Format2,
+    names_to = &quot;year&quot;,
+    values_to = &quot;revenue&quot;
+  ) |&gt;
+  mutate(
+    year = as.integer(year),
+    revenue = parse_number(revenue)
+  ) |&gt;
+  rename(format = Format2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVhVzVtYkdGMGFXOXVJRHd0SUhKbFlXUmZZM04yS0Z3aUwxVnpaWEp6TDNwdlpXSmhlV1YzYVhSNkwwUnZZM1Z0Wlc1MGN5OUhhWFJJZFdJdmFtOTFjalF3TlY5emNISnBibWN5Tmk5d2NtOXFaV04wTDJOd2FWOXBibVpzWVhScGIyNHVZM04yWENJcFhHNWdZR0FpZlE9PSAtLT5cblxuYGBgclxuaW5mbGF0aW9uIDwtIHJlYWRfY3N2KFwiL1VzZXJzL3pvZWJheWV3aXR6L0RvY3VtZW50cy9HaXRIdWIvam91cjQwNV9zcHJpbmcyNi9wcm9qZWN0L2NwaV9pbmZsYXRpb24uY3N2XCIpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
@@ -1797,8 +1823,8 @@ sales.</p>
 <pre class="r"><code>inflation &lt;- read_csv(&quot;/Users/zoebayewitz/Documents/GitHub/jour405_spring26/project/cpi_inflation.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTIxIENvbHVtbnM6IDLilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5kYmwgICgxKTogQ1BJQVVDU0xcbmRhdGUgKDEpOiBvYnNlcnZhdGlvbl9kYXRlXG7ihLkgVXNlIGBzcGVjKClgIHRvIHJldHJpZXZlIHRoZSBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9uIGZvciB0aGlzIGRhdGEuXG7ihLkgU3BlY2lmeSB0aGUgY29sdW1uIHR5cGVzIG9yIHNldCBgc2hvd19jb2xfdHlwZXMgPSBGQUxTRWAgdG8gcXVpZXQgdGhpcyBtZXNzYWdlLlxuIn0= -->
-<pre><code>Rows: 121 Columns: 2── Column specification ──────────────────────────────────────────────────────────────
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTIxIENvbHVtbnM6IDLilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5kYmwgICgxKTogQ1BJQVVDU0xcbmRhdGUgKDEpOiBvYnNlcnZhdGlvbl9kYXRlXG7ihLkgVXNlIGBzcGVjKClgIHRvIHJldHJpZXZlIHRoZSBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9uIGZvciB0aGlzIGRhdGEuXG7ihLkgU3BlY2lmeSB0aGUgY29sdW1uIHR5cGVzIG9yIHNldCBgc2hvd19jb2xfdHlwZXMgPSBGQUxTRWAgdG8gcXVpZXQgdGhpcyBtZXNzYWdlLlxuIn0= -->
+<pre><code>Rows: 121 Columns: 2── Column specification ─────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
 dbl  (1): CPIAUCSL
 date (1): observation_date
@@ -1807,12 +1833,31 @@ date (1): observation_date
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Tracks monthly inflation rates from 2015-2022. Used in conjunction
-with the revenue sales to weigh customer spending habits
-accordingly.</p>
+<p>Tracks monthly inflation rates from 2015-2022, to be compared against
+streaming sales. I need to add data going back to 1973. I’ll then need
+to reformat the monthly data by turning it into an annual figure
+(finding averages). Other than that, I just need the CPIAUCSL column to
+measure it against the revenue; .</p>
+<p>TRANSFORM MONTHLY INTO ANNUAL:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVhVzVtYkdGMGFXOXVYMkZ1Ym5WaGJDQThMU0JwYm1ac1lYUnBiMjRnZkQ1Y2JpQWdjbVZ1WVcxbEtHUmhkR1VnUFNCdlluTmxjblpoZEdsdmJsOWtZWFJsTENCamNHa2dQU0JEVUVsQlZVTlRUQ2tnZkQ0Z1hHNGdJRzExZEdGMFpTaGNiaUFnSUNCa1lYUmxQV0Z6TGtSaGRHVW9aR0YwWlNrc1hHNGdJQ0FnZVdWaGNqMWhjeTVwYm5SbFoyVnlLR1p2Y20xaGRDaGtZWFJsTENCY0lpVlpYQ0lwS1Z4dUlDQXBYRzRnSUNBZ0lDQmNiaUFnWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG5pbmZsYXRpb25fYW5udWFsIDwtIGluZmxhdGlvbiB8PlxuICByZW5hbWUoZGF0ZSA9IG9ic2VydmF0aW9uX2RhdGUsIGNwaSA9IENQSUFVQ1NMKSB8PiBcbiAgbXV0YXRlKFxuICAgIGRhdGU9YXMuRGF0ZShkYXRlKSxcbiAgICB5ZWFyPWFzLmludGVnZXIoZm9ybWF0KGRhdGUsIFwiJVlcIikpXG4gIClcbiAgICAgIFxuICBcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5mbGF0aW9uX2FubnVhbCA8LSBpbmZsYXRpb24gfD5cbiAgcmVuYW1lKGRhdGUgPSBvYnNlcnZhdGlvbl9kYXRlLCBjcGkgPSBDUElBVUNTTCkgfD4gXG4gIG11dGF0ZShcbiAgICBkYXRlPWFzLkRhdGUoZGF0ZSksXG4gICAgeWVhcj1hcy5pbnRlZ2VyKGZvcm1hdChkYXRlLCBcIiVZXCIpKVxuICApXG4gICAgICBcbiAgXG5gYGAifQ== -->
+<pre class="r"><code>inflation_annual &lt;- inflation |&gt;
+  rename(date = observation_date, cpi = CPIAUCSL) |&gt; 
+  mutate(
+    date=as.Date(date),
+    year=as.integer(format(date, &quot;%Y&quot;))
+  )
+      
+  </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluYWwgUHJvamVjdCIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVHJ5IHRvIGhhdmUgeW91ciBkYXRhIGlkZW50aWZpZWQgYW5kIGxvYWRlZCAoaWYgbm90LCBtYWtlIHN1YnN0YW50aWFsIHByb2dyZXNzIG9uIGRvaW5nIHRoYXQpIHRoaXMgd2Vlay4gWW91IHNob3VsZCBjcmVhdGUgYSBub3RlYm9vayBjYWxsZWQgZmluYWxfcHJvamVjdC5SbWQgaW4gdGhlIHByb2plY3QgZm9sZGVyIG9mIHlvdXIgY2xhc3MgcmVwb3NpdG9yeS4gUHV0IGFsbCBub3RlcyBhbmQgY29kZSBpbiB0aGF0IGRvY3VtZW50LCBhbmQgZG8gbm90IHNwYXJlIHRoZSBkZXRhaWxzLiBJZiB5b3UgaGF2ZSB0aGUgZGF0YSwgZGVzY3JpYmUgdGhlIHNvdXJjZSwgcHJvdmlkaW5nIGxpbmtzIHRvIGl0IGFuZCBhbnkgZG9jdW1lbnRhdGlvbiB5b3UgY2FuIGZpbmQuIElmIHlvdSBjYW4gbG9hZCBpdCBmcm9tIHRoZSBXZWIsIGRvIHRoYXQuIElmIG5vdCwgc2F2ZSBhIGNvcHkgb2YgdGhlIGRhdGEgaW4geW91ciBwcm9qZWN0IGZvbGRlci4gSU1QT1JUQU5UIE5PVEU6IGRvIG5vdCBzYXZlIGEgY29weSBpZiBpdCBpcyBtb3JlIHRoYW4gMTAwTUIgaW4gc2l6ZS4gSW5zdGVhZCwgY29udGFjdCBtZSBmaXJzdCBmb3IgYXNzaXN0YW5jZS4KCk90aGVyd2lzZSwgbG9hZCB0aGUgZGF0YSBhbmQgZXhhbWluZSBpdCB1c2luZyB0aGUgdGlkeXZlcnNlIGFuZCByZWFkX2NzdiwgZGVzY3JpYmluZyBpdCBpbiB5b3VyIHByb2plY3Qgbm90ZWJvb2suIFdoYXQgZG9lcyBpdCBjb250YWluIGFuZCB3aGF0IHRpbWUgcGVyaW9kIGRvZXMgaXQgY292ZXI/IFdoaWNoIGNvbHVtbnMgd2lsbCBiZSBtb3N0IGltcG9ydGFudCBmb3IgeW91ciBhbmFseXNpcz8gV2hhdCdzIG1pc3NpbmcgdGhhdCB5b3UgbWlnaHQgbmVlZCBvciB3YW50PyBXaGF0IHF1ZXN0aW9ucyBkbyB5b3UgaGF2ZSBhYm91dCBpdCBvciBuZWVkIGhlbHAgYW5zd2VyaW5nPyBBZ2FpbiwgdGhlIG1vcmUgZGV0YWlsLCB0aGUgaGlnaGVyIHlvdXIgZ3JhZGUuCgpgYGB7cn0KbXVzaWNfcmV2ZW51ZSA8LSByZWFkX2NzdigiL1VzZXJzL3pvZWJheWV3aXR6L0RvY3VtZW50cy9HaXRIdWIvam91cjQwNV9zcHJpbmcyNi9wcm9qZWN0L1JlY29yZGVkX011c2ljX1JldmVudWUuY3N2IikKYGBgCkhpc3RvcmljYWwgZGF0YSBvZiB5ZWFybHkgcmV2ZW51ZSByZWNvcmRlZCBieSBSSUFBIG9mIG11c2ljIHNhbGVzIGZyb20gMTk3My0yMDIxLiBGaWx0ZXJlZCBieSBmb3VyIGZvcm1hdHM6ICBQaHlzaWNhbCwgRGlnaXRhbCBEb3dubG9hZHMsIFN0cmVhbWluZywgYW5kIFN5bmNocm9uaXphdGlvbi4gUGh5c2ljYWwgdmVyc3VzIHN0cmVhbWluZyB3aWxsIGJlIG15IGZvY3VzLiBJIG5lZWQgbW9yZSBpbmZvcm1hdGlvbiBvbiB3aGF0IGlzIGluY2x1ZGVkIGluIGV2ZXJ5IGZvcm1hdCBhbmQgaG93IGNvbXByZWhlbnNpdmUgdGhleSBhcmUuIFRoaXMgd2lsbCBiZSBoZWxwZnVsIGluIHRyYWNraW5nIHRoZSBwcm9ncmVzc2lvbiBvZiBkaWdpdGFsIHN0cmVhbWluZyBhbmQgaG93L3doZW4gaXQgaW1wYWN0ZWQgcGh5c2ljYWwgbXVzaWMgc2FsZXMuCgpgYGB7cn0KaW5mbGF0aW9uIDwtIHJlYWRfY3N2KCIvVXNlcnMvem9lYmF5ZXdpdHovRG9jdW1lbnRzL0dpdEh1Yi9qb3VyNDA1X3NwcmluZzI2L3Byb2plY3QvY3BpX2luZmxhdGlvbi5jc3YiKQpgYGAKVHJhY2tzIG1vbnRobHkgaW5mbGF0aW9uIHJhdGVzIGZyb20gMjAxNS0yMDIyLiBVc2VkIGluIGNvbmp1bmN0aW9uIHdpdGggdGhlIHJldmVudWUgc2FsZXMgdG8gd2VpZ2ggY3VzdG9tZXIgc3BlbmRpbmcgaGFiaXRzIGFjY29yZGluZ2x5Lgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluYWwgUHJvamVjdCIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCkhZUE9USEVTSVM6IFJldmVudWUgZWFybmVkIGZyb20gc3RyZWFtaW5nIHNlcnZpY2VzIGhhcyBub3QgZnVsbHkgY29tcGVuc2F0ZWQgZm9yIHRoZSBtdXNpYyBpbmR1c3RyeSdzIGRlY2xpbmUgaW4gcGh5c2ljYWwgbXVzaWMgc2FsZXMsIHdoZW4gYWRqdXN0ZWQgZm9yIGluZmxhdGlvbi4KCkNvZGUgSSBjb3VsZCBydW46IAotIGFkanVzdGluZyBpbmZsYXRpb24gZnJvbSBtb250aGx5IHRvIHllYXJseSAocGFydGlhbGx5IGRvbmUtLSBqdXN0IG5lZWQgdG8gY2FsY3VsYXRlIGF2ZXJhZ2VzKQogIC0gY29tcGFyZSB0aGlzIGRhdGEgdG8gcGh5c2ljYWwgYW5kIHN0cmVhbWluZyBzYWxlcwotIGxpbmVhciByZWdyZXNzaW9uIGNoYXJ0OiBmaW5kIHRoZSBsaW5lcyBvZiBzdHJlYW1pbmcgYW5kIHBoeXNpY2FsIHJldmVudWUgb3ZlciB0aW1lIGFuZCBncmFwaCB0aGVtIHVzaW5nIGEgZ2dwbG90Ci0gKG1vcmUgbWF0aCkgY2FsY3VsYXRlIHllYXJseSBwZXJjZW50IGNoYW5nZXMgb2YgcGh5c2ljYWwgYW5kIHN0cmVhbWluZyBzYWxlcyAoZ2l2ZXMgdXMgbW9yZSBzcGVjaWZpYyBpbmRpY2F0b3JzIG9mIHdoZW4gc3RyZWFtaW5nIGRpZG4ndCBjb21wZW5zYXRlIGZvciBwaHlzaWNhbCkKLSBtZWFzdXJlIGNvcnJlbGF0aW9uIGNvZWZmaWNpZW50IG9mIHBoeXNpY2FsJ3MgZGVjbGluZSBhbmQgc3RyZWFtaW5nJ3MgcmlzZSAKLSBjYWxjdWxhdGUgdGhlIGRvbGxhciBhbW91bnQgYmV0d2VlbiB3aGF0IHBoeXNpY2FsIGVhcm5lZCBiZWZvcmUgYW5kIHdoYXQgc3RyZWFtaW5nIGVhcm5zIG5vdywgaW5jbHVkaW5nIGluZmxhdGlvbgoKYGBge3J9CmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKCmBgYHtyfQptdXNpY19yZXZlbnVlIDwtIHJlYWRfY3N2KCIvVXNlcnMvem9lYmF5ZXdpdHovRG9jdW1lbnRzL0dpdEh1Yi9qb3VyNDA1X3NwcmluZzI2L3Byb2plY3QvUmVjb3JkZWRfTXVzaWNfUmV2ZW51ZS5jc3YiKQpgYGAKSGlzdG9yaWNhbCBkYXRhIG9mIHllYXJseSByZXZlbnVlIHJlY29yZGVkIGJ5IFJJQUEgb2YgbXVzaWMgc2FsZXMgZnJvbSAxOTczLTIwMjUuIEZpbHRlcmVkIGJ5IGZvdXIgZm9ybWF0czogIFBoeXNpY2FsLCBEaWdpdGFsIERvd25sb2FkcywgU3RyZWFtaW5nLCBhbmQgU3luY2hyb25pemF0aW9uLiBQaHlzaWNhbCB2ZXJzdXMgU3RyZWFtaW5nIHdpbGwgYmUgbXkgZm9jdXMuIFRoZSBkYXRhIGlzIG9yaWdpbmFsbHkgaW4gd2lkZSBmb3JtYXQsIHNvIGl0IG5lZWRzIHRvIGJlIHN3aXRjaGVkIGludG8gbG9uZyBmb3JtYXQuIEknbGwgZm9jdXMgb24gdGhlIHBoeXNpY2FsIGFuZCBzdHJlYW1pbmcgcm93cyAodXNlIERlcmVrIGNvZGUpLiBJJ2xsIGFsc28gbmVlZCB0byBjbGVhbiB0aGUgZGF0YSBiZWNhdXNlIG51bWJlcnMgYXJlIGluIHJldmVudWUgZm9ybWF0LCBhbmQgdGhlIGNvbHVtbiBuYW1lcyBhcmVuJ3QgY2xlYW5lZC4KCmBgYHtyfQptdXNpY19yZXZlbnVlX2xvbmcgPC0gbXVzaWNfcmV2ZW51ZSB8PgogIHBpdm90X2xvbmdlcigKICAgIGNvbHMgPSAtRm9ybWF0MiwKICAgIG5hbWVzX3RvID0gInllYXIiLAogICAgdmFsdWVzX3RvID0gInJldmVudWUiCiAgKSB8PgogIG11dGF0ZSgKICAgIHllYXIgPSBhcy5pbnRlZ2VyKHllYXIpLAogICAgcmV2ZW51ZSA9IHBhcnNlX251bWJlcihyZXZlbnVlKQogICkgfD4KICByZW5hbWUoZm9ybWF0ID0gRm9ybWF0MikKYGBgCgoKYGBge3J9CmluZmxhdGlvbiA8LSByZWFkX2NzdigiL1VzZXJzL3pvZWJheWV3aXR6L0RvY3VtZW50cy9HaXRIdWIvam91cjQwNV9zcHJpbmcyNi9wcm9qZWN0L2NwaV9pbmZsYXRpb24uY3N2IikKYGBgClRyYWNrcyBtb250aGx5IGluZmxhdGlvbiByYXRlcyBmcm9tIDIwMTUtMjAyMiwgdG8gYmUgY29tcGFyZWQgYWdhaW5zdCBzdHJlYW1pbmcgc2FsZXMuIEkgbmVlZCB0byBhZGQgZGF0YSBnb2luZyBiYWNrIHRvIDE5NzMuIEknbGwgdGhlbiBuZWVkIHRvIHJlZm9ybWF0IHRoZSBtb250aGx5IGRhdGEgYnkgdHVybmluZyBpdCBpbnRvIGFuIGFubnVhbCBmaWd1cmUgKGZpbmRpbmcgYXZlcmFnZXMpLiBPdGhlciB0aGFuIHRoYXQsIEkganVzdCBuZWVkIHRoZSBDUElBVUNTTCBjb2x1bW4gdG8gbWVhc3VyZSBpdCBhZ2FpbnN0IHRoZSByZXZlbnVlOyAuCgpUUkFOU0ZPUk0gTU9OVEhMWSBJTlRPIEFOTlVBTDoKYGBge3J9CmluZmxhdGlvbl9hbm51YWwgPC0gaW5mbGF0aW9uIHw+CiAgcmVuYW1lKGRhdGUgPSBvYnNlcnZhdGlvbl9kYXRlLCBjcGkgPSBDUElBVUNTTCkgfD4gCiAgbXV0YXRlKAogICAgZGF0ZT1hcy5EYXRlKGRhdGUpLAogICAgeWVhcj1hcy5pbnRlZ2VyKGZvcm1hdChkYXRlLCAiJVkiKSkKICApCgpgYGAKCg==</div>
 
 
 

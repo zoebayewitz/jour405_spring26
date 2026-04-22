@@ -3,16 +3,54 @@ title: "Final Project"
 output: html_notebook
 ---
 
-Try to have your data identified and loaded (if not, make substantial progress on doing that) this week. You should create a notebook called final_project.Rmd in the project folder of your class repository. Put all notes and code in that document, and do not spare the details. If you have the data, describe the source, providing links to it and any documentation you can find. If you can load it from the Web, do that. If not, save a copy of the data in your project folder. IMPORTANT NOTE: do not save a copy if it is more than 100MB in size. Instead, contact me first for assistance.
 
-Otherwise, load the data and examine it using the tidyverse and read_csv, describing it in your project notebook. What does it contain and what time period does it cover? Which columns will be most important for your analysis? What's missing that you might need or want? What questions do you have about it or need help answering? Again, the more detail, the higher your grade.
+HYPOTHESIS: Revenue earned from streaming services has not fully compensated for the music industry's decline in physical music sales, when adjusted for inflation.
+
+Code I could run: 
+- adjusting inflation from monthly to yearly (partially done-- just need to calculate averages)
+  - compare this data to physical and streaming sales
+- linear regression chart: find the lines of streaming and physical revenue over time and graph them using a ggplot
+- (more math) calculate yearly percent changes of physical and streaming sales (gives us more specific indicators of when streaming didn't compensate for physical)
+- measure correlation coefficient of physical's decline and streaming's rise 
+- calculate the dollar amount between what physical earned before and what streaming earns now, including inflation
+
+```{r}
+library(tidyverse)
+```
 
 ```{r}
 music_revenue <- read_csv("/Users/zoebayewitz/Documents/GitHub/jour405_spring26/project/Recorded_Music_Revenue.csv")
 ```
-Historical data of yearly revenue recorded by RIAA of music sales from 1973-2021. Filtered by four formats:  Physical, Digital Downloads, Streaming, and Synchronization. Physical versus streaming will be my focus. I need more information on what is included in every format and how comprehensive they are. This will be helpful in tracking the progression of digital streaming and how/when it impacted physical music sales.
+Historical data of yearly revenue recorded by RIAA of music sales from 1973-2025. Filtered by four formats:  Physical, Digital Downloads, Streaming, and Synchronization. Physical versus Streaming will be my focus. The data is originally in wide format, so it needs to be switched into long format. I'll focus on the physical and streaming rows (use Derek code). I'll also need to clean the data because numbers are in revenue format, and the column names aren't cleaned.
+
+```{r}
+music_revenue_long <- music_revenue |>
+  pivot_longer(
+    cols = -Format2,
+    names_to = "year",
+    values_to = "revenue"
+  ) |>
+  mutate(
+    year = as.integer(year),
+    revenue = parse_number(revenue)
+  ) |>
+  rename(format = Format2)
+```
+
 
 ```{r}
 inflation <- read_csv("/Users/zoebayewitz/Documents/GitHub/jour405_spring26/project/cpi_inflation.csv")
 ```
-Tracks monthly inflation rates from 2015-2022. Used in conjunction with the revenue sales to weigh customer spending habits accordingly.
+Tracks monthly inflation rates from 2015-2022, to be compared against streaming sales. I need to add data going back to 1973. I'll then need to reformat the monthly data by turning it into an annual figure (finding averages). Other than that, I just need the CPIAUCSL column to measure it against the revenue; .
+
+TRANSFORM MONTHLY INTO ANNUAL:
+```{r}
+inflation_annual <- inflation |>
+  rename(date = observation_date, cpi = CPIAUCSL) |> 
+  mutate(
+    date=as.Date(date),
+    year=as.integer(format(date, "%Y"))
+  )
+
+```
+
