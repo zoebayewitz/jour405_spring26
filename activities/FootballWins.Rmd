@@ -1,4 +1,3 @@
-
 ---
 title: "Multiple Regression Analysis in R"
 ---
@@ -54,7 +53,7 @@ The coefficients tell us the estimated effect of each independent variable on th
 
 Is this a useful model, based on what you've seen? Why?
 
-ANSWER HERE
+ANSWER HERE: The majority of this model is useful, with some caveats. A low p-score and F-statistic show clear statistical significance. The adjusted R-squared shows that the model accounts for 58% of variance, which is just over half of the data. However, the Yards Gained have a negative co-efficient and therefore doesn't make much sense-- therefore, it should be excluded from the model. Overall, the model is valid and can be used, but factors such as the Residual Standard Error and Yards Gained make the model less precise.
 
 ## Correlation Analysis
 
@@ -80,8 +79,10 @@ The results from our correlation analysis show the strength of the relationships
 
 Which of these three factors - Yards Gained, Takeaways and Points Scored - have the most impact on wins? Are there any that do not seem impactful at all?
 
-ANSWER HERE
+ANSWER HERE: A better model would be a linear regression where Yards Gained are dropped; it is correlated highly with Points Scored and doesn't add other useful information. Eliminating Yards Gains would eliminate redundancy and statistical insignificance. I would keep Points Scored and Takeaways, which both show significant relationships with wins, and would produce cleaner, more reliable coefficients. I would add Giveaways, which shows the turnover from one team to the other, and would have a strong correlation with Takeaways. 
 
 ## Using the Model (3 points)
 
 Without using the words "multiple regression model", describe how you could use this model to cover a team or game.
+
+This model can be used to evaluate if a team's wins correlate with their performance in games. Using a team's Points Scored, Takeaways, and Giveaways allows us to predict how many wins a team might have. This can be compared to their actual record to see if it's accurate. In journalism, this can be used to write either about a team's success and if it's sustainable, or a team's losses and if they're improving.
