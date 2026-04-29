@@ -3,7 +3,6 @@ title: "Final Project"
 output: html_notebook
 ---
 
-
 HYPOTHESIS: Revenue earned from streaming services has not fully compensated for the music industry's decline in physical music sales, when adjusted for inflation.
 
 Code I could run: 
@@ -23,6 +22,7 @@ music_revenue <- read_csv("/Users/zoebayewitz/Documents/GitHub/jour405_spring26/
 ```
 Historical data of yearly revenue recorded by RIAA of music sales from 1973-2025. Filtered by four formats:  Physical, Digital Downloads, Streaming, and Synchronization. Physical versus Streaming will be my focus. The data is originally in wide format, so it needs to be switched into long format. I'll focus on the physical and streaming rows (use Derek code). I'll also need to clean the data because numbers are in revenue format, and the column names aren't cleaned.
 
+from Derek:
 ```{r}
 music_revenue_long <- music_revenue |>
   pivot_longer(
@@ -39,18 +39,84 @@ music_revenue_long <- music_revenue |>
 
 
 ```{r}
-inflation <- read_csv("/Users/zoebayewitz/Documents/GitHub/jour405_spring26/project/cpi_inflation.csv")
+inflation <- read_csv("/Users/zoebayewitz/Documents/GitHub/jour405_spring26/project/Inflation_1973_2025.csv")
 ```
-Tracks monthly inflation rates from 2015-2022, to be compared against streaming sales. I need to add data going back to 1973. I'll then need to reformat the monthly data by turning it into an annual figure (finding averages). Other than that, I just need the CPIAUCSL column to measure it against the revenue; .
+Tracks monthly inflation rates from 2015-2022, to be compared against streaming sales. I need to add data going back to 1973. I'll then need to reformat the monthly data by turning it into an annual figure (finding averages).(UPDATE: found version with annual figure at the end) Other than that, I just need the CPIAUCSL column to measure it against the revenue.
 
-TRANSFORM MONTHLY INTO ANNUAL:
+FILTER BY ANNUAL CPI ONLY:
 ```{r}
 inflation_annual <- inflation |>
-  rename(date = observation_date, cpi = CPIAUCSL) |> 
+ select(Year, Annual) |>
+  rename (year = Year, cpi_annual = Annual)
+```
+Narrows the inflation data down to just the columns needed for yearly analysis-- the year and the annual average CPI. Renamed to match my other dataframes. I ran code to find my own yearly averages, but they were nearly identical to the "Annual" column already given. This will be used to adjust inflation when making direct yearly comparisons between revenue and format.
+
+ADJUST FOR INFLATION (2025)
+```{r}
+base_cpi <- inflation_annual |>
+  filter (year == 2025) |>
+  pull(cpi_annual)
+```
+Sets 2025 as the baseline year when adjusting revenue for inflation. By using 2025 CPI as a baseline, every year's revenue can be adjusted relative to a dollar's value in 2025. Essentially, when we compare revenue from 1999 to revenue from 2024, we're comparing in the same dollar terms rather than the dollar value of the respective year (writing this more for my clarity :) ).
+
+AI assistance: https://claude.ai/share/b4e942a3-f913-419e-98a0-dc2b64ee56cd
+
+JOIN REVENUE + INFLATION AND ADJUST
+```{r}
+music_revenue_adjusted <- music_revenue_long |>
+  left_join(inflation_annual, by = "year") |>
+  mutate(adj_revenue = revenue * (base_cpi / cpi_annual))
+```
+Merges revenue and inflation data, then calculates revenue for every format and year, adjusted for inflation. This adjustment is what will allow me to make fair comparisons between physical sale peaks and recent streaming revenue.
+
+FILTER TO PHYSICAL + STREAMING
+```{r}
+music_filtered <- music_revenue_adjusted |>
+  filter(format %in% c("Physical", "Streaming"))
+```
+Filters data down to Physical and Streaming, which are the two formats I will be comparing. I opted to exclude Digital Downloads and Synchronization to make the hypothesis more direct, and I will be sure to specify that the comparison is only being drawn between physical sale and streaming revenue.
+
+INFLATION-ADJUSTED TRENDS (REGRESSION CHART)
+```{r}
+library(scales)
+
+ggplot(music_filtered, aes(x = year, y = adj_revenue, color = format)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_y_continuous(
+    labels = label_dollar(scale = 1e-9, suffix = "B"),
+    limits = c(0, NA)) +
+  labs(
+    x = "Year",
+    y = "Revenue (billions, adjusted for 2025 inflation)",
+    title = "Physical vs. Streaming Music Revenue"
+  )
+```
+Plot of inflation-adjusted physical and streaming revenue over time, with a linear regression line for each format. I used AI to help me adjust the y-axis values to the billions and add the dollar signs. The regression lines show us the general trend of each format, with physical's steady decline and streaming's rise since the late 1980s. Streaming's regression line includes data from before streaming existed (which may alter the ability to compare). Nonetheless, this will allow us to determine whether streaming's growth rate is on track to match what physical sales once earned.
+
+AI assistance: https://claude.ai/share/42c91146-f1ba-42c5-8693-923e79d93d90
+Question: Are using the confidence intervals necessary? If so, how do I disclose what those lines mean?
+Also, is a regression line useful for streaming, when it includes years where streaming didn't exist? If so, how would I adjust the line to exclude those years?
+
+DOLLAR GAP
+
+
+YEAR-BY-YEAR % CHANGE
+```{r}
+yearly_change <- music_revenue_long |>
+  filter(format %in% c("Physical", "Streaming")) |>
+  group_by(format) |>
+  arrange(year) |>
   mutate(
-    date=as.Date(date),
-    year=as.integer(format(date, "%Y"))
+    prev_revenue = lag(revenue),
+    pct_change = (revenue - prev_revenue) / prev_revenue * 100
   )
 
+yearly_change
 ```
+Calculates year-by-year percentage change in revenue for Physical and Streaming separately. This specifies the analysis of the hypothesis by letting us see exactly when physical was decline faster than streaming was growing.
 
+Question: should I graph this, or is the data itself enough?
+Should I use the adjusted revenue instead for both?
+
+TOTAL INDUSTRY RECOVERY
