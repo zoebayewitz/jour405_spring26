@@ -1,6 +1,6 @@
 ---
 title: "Multiple Regression Analysis: Maryland Voter Turnout"
-name: "YOUR NAME HERE"
+name: "Zoe Bayewitz"
 ---
 
 # Introduction
@@ -26,7 +26,7 @@ head(md_turnout)
 
 Before building our model, let's explore the data to understand the variables and their relationships. Examine the correlation matrix to see how the independent variables relate to each other and to the dependent variable (voter turnout). Which variables seem to be correlated? Are there any that are not correlated at all? Also look at the multiple scatterplots. Which variables seem to have a linear relationship with the dependent variable? Which do not?
 
-ANSWER HERE
+ANSWER HERE: The variables that have a clear positive linear relationship with voter turnout are median age, percent white, and income. Percent with a bachelors or higher has a positive trend line, but with many more outliers and scattered data. Pct_unemployed shows a negatively correlated relationship (counties with higher unemployment vote less). Population seems to have no meaningful correlation with turnout, as the data is heavily clustered, and probably will not tell us much about turnout. 
 
 
 ```{r}
@@ -89,7 +89,7 @@ The coefficients tell us the estimated effect of each independent variable on th
 
 Examine the output of the model, checking the coefficients, residuals, and overall model fit. How well does this multiple variable model predict turnout? Do any of the variables seem to be insignificant? Is this a useful model, based on what you've seen? Why?
 
-ANSWER HERE
+ANSWER HERE: This model is useful, with the R-squared telling us that the model covers 85% of variance in turnout. The F-statistic also shows high significance, and the residuals are small. The variables of population, pct_bachelors and pct_unemployed have p-values above 0.05, making them less significant. The model is useful overall, as it shows clear meaningful relationships in the data, but it would be improved by removing the insignificant variables to clean the data.
 
 ```{r}
 # Build initial model with all predictors
@@ -103,19 +103,19 @@ summary(initial_model)
 
 Create three alternative models by adding or removing variables to see if we can improve the model's performance. Turnout will always be the dependent variable, but you should alter the independent variables by removing or adding some. Then compare the models using adjusted R-squared values. Are any of the models significantly better than the others?
 
-ANSWER HERE
+ANSWER HERE: Model 3 is the best, with the highest R-squared of 0.82 (compared to .802). This means that unemployment, despite being not statistically significant, adds value to the model. 
 
 ```{r}
 # Model 2
-model2 <- lm(turnout ~ REPLACE ME, data = md_turnout)
+model2 <- lm(turnout ~ income + median_age + pct_white, data = md_turnout)
 summary(model2)
 
 # Model 3
-model3 <- lm(turnout ~ REPLACE ME, data = md_turnout)
+model3 <- lm(turnout ~ income + median_age + pct_white + pct_unemployed, data = md_turnout)
 summary(model3)
 
 # Model 4
-model4 <- lm(turnout ~ REPLACE ME, data = md_turnout)
+model4 <- lm(turnout ~ median_age + pct_white + pct_bachelors_higher, data = md_turnout)
 summary(model4)
 
 # Compare models
@@ -144,4 +144,4 @@ ggplot(model_comparison, aes(x = reorder(Model, Adjusted_R_squared), y = Adjuste
 
 Without using the words "multiple regression model", describe how you could use this analysis to cover an election or voter participation story.
 
-ANSWER HERE
+ANSWER HERE: This analysis could help me identify which Maryland counties are likely to have high or low turnout before an election based on their demographics. Because the strongest indicators are income, median age, and racial composition, I would focus on lower-income, younger, more diverse areas, like PG County or Baltimore City. The model would likely indicate low voter turnout, and could tell us which counties over or under preformed based on the model's analysis.
